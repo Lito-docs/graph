@@ -1,0 +1,61 @@
+---
+title: Configuration
+description: "How to configure Lito Graph's docs-config.json for building and serving documentation graphs."
+keywords:
+  - configuration
+  - docs-config.json
+  - mcp server config
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - reference
+  - configuration
+section: Reference
+---
+
+# Configuration
+
+Lito Graph uses standard Lito `docs-config.json` for site configuration. The graph compiler reads documentation files independently of this config.
+
+## Graph-Specific Settings
+
+The graph compiler does not require `docs-config.json`. It works with any folder of Markdown files. However, when your docs also serve as a Lito site, the same `docs-config.json` controls both.
+
+## File Exclusions
+
+The compiler automatically excludes these directories:
+
+| Directory | Reason |
+|-----------|--------|
+| `_assets/` | Static asset files |
+| `_css/` | Custom stylesheets |
+| `_images/` | Image files |
+| `_static/` | Static files |
+| `_landing/` | Custom landing page HTML |
+| `_navbar/` | Custom navbar HTML |
+| `_footer/` | Custom footer HTML |
+| `public/` | Public static files |
+| `node_modules/` | Dependencies |
+
+And these files:
+
+| File | Reason |
+|------|--------|
+| `docs-config.json` | Site configuration, not content |
+| `vercel.json` | Deployment config |
+| `netlify.toml` | Deployment config |
+| `README.md` | Repository readme, not documentation |
+
+## MCP Server Configuration
+
+The MCP server is configured in your IDE's MCP settings, not in `docs-config.json`. See [IDE Setup](/getting-started/ide-setup) for details.
+
+## Build Output
+
+The `graph.json` output path defaults to `./graph.json` in the current directory. Override with `-o`:
+
+```bash
+lito-graph build -i ./docs -o ./dist/graph.json
+```
+
+The output is a self-contained JSON file that can be versioned, deployed, or loaded by the MCP server.

@@ -1,0 +1,154 @@
+---
+title: Frontmatter Schemas
+description: "Complete reference for all frontmatter fields supported by Lito Graph for each document type."
+keywords:
+  - frontmatter
+  - schema
+  - yaml
+  - zod validation
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - reference
+  - frontmatter
+section: Reference
+---
+
+# Frontmatter Schemas
+
+Lito Graph validates frontmatter using Zod schemas. The `type` field determines which schema is applied.
+
+## Standard Doc (`type: "doc"` or omitted)
+
+```yaml
+---
+title: "Page Title"
+description: "SEO description"
+keywords: [keyword1, keyword2]
+author: "Author Name"
+publishDate: "2026-01-01"
+tags: [tag1, tag2]
+section: "Section Name"
+version: "v1"
+locale: "en"
+---
+```
+
+| Field | Type | Required | Default |
+|-------|------|----------|---------|
+| `title` | `string` | No | Derived from slug |
+| `description` | `string` | No | First paragraph |
+| `keywords` | `string[]` | No | `[]` |
+| `tags` | `string[]` | No | `[]` |
+| `section` | `string` | No | — |
+| `version` | `string` | No | — |
+| `locale` | `string` | No | — |
+
+## Concept (`type: "concept"`)
+
+```yaml
+---
+type: concept
+canonical_name: "Workspace"
+entity_type: "resource"
+aliases: ["Org Workspace"]
+related_entities: ["User", "Project"]
+tags: [core]
+version: "v1"
+---
+```
+
+| Field | Type | Required | Default |
+|-------|------|----------|---------|
+| `type` | `"concept"` | Yes | — |
+| `canonical_name` | `string` | **Yes** | — |
+| `entity_type` | `string` | No | `"resource"` |
+| `aliases` | `string[]` | No | `[]` |
+| `related_entities` | `string[]` | No | `[]` |
+
+## API (`type: "api"`)
+
+```yaml
+---
+type: api
+operation_id: "create_workspace"
+api_type: "http"
+method: "POST"
+path: "/v1/workspaces"
+resource: "Workspace"
+capabilities: ["create"]
+side_effects: ["creates_record"]
+preconditions: ["user_authenticated"]
+permissions: ["workspace:write"]
+rate_limit: "50/min"
+---
+```
+
+| Field | Type | Required | Default |
+|-------|------|----------|---------|
+| `type` | `"api"` | Yes | — |
+| `operation_id` | `string` | **Yes** | — |
+| `api_type` | `string` | No | `"http"` |
+| `method` | `string` | No | — |
+| `path` | `string` | No | — |
+| `resource` | `string` | No | — |
+| `capabilities` | `string[]` | No | `[]` |
+| `side_effects` | `string[]` | No | `[]` |
+| `preconditions` | `string[]` | No | `[]` |
+| `permissions` | `string[]` | No | `[]` |
+| `rate_limit` | `string` | No | — |
+
+### Backward Compatibility
+
+The legacy Lito format is auto-converted:
+
+```yaml
+# This format:
+api: "GET /v1/users"
+
+# Becomes:
+type: api
+method: "GET"
+path: "/v1/users"
+operation_id: "get_v1_users"
+api_type: "http"
+```
+
+## Workflow (`type: "workflow"`)
+
+```yaml
+---
+type: workflow
+workflow_id: "onboard_new_workspace"
+goal: "Onboard a new customer workspace."
+primary_entity: "Workspace"
+risk_level: "medium"
+requires_human_approval: true
+tags: [onboarding]
+---
+```
+
+| Field | Type | Required | Default |
+|-------|------|----------|---------|
+| `type` | `"workflow"` | Yes | — |
+| `workflow_id` | `string` | **Yes** | — |
+| `goal` | `string` | **Yes** | — |
+| `primary_entity` | `string` | No | — |
+| `risk_level` | `string` | No | — |
+| `requires_human_approval` | `boolean` | No | `false` |
+
+### Required Body Sections
+
+Workflow documents should include these `##` sections:
+
+| Section | Parsed As |
+|---------|-----------|
+| `## Preconditions` | Bullet list of prerequisites |
+| `## Steps` | Numbered list of actions (backtick refs create `USES_API` edges) |
+| `## Failure Modes` | Bullet list of what can go wrong |
+| `## Recovery` | Bullet list of recovery actions |
+| `## Guardrails` | Bullet list of hard constraints |
+
+## Validation
+
+All schemas are defined in `src/types/frontmatter.ts` using Zod. Invalid frontmatter produces a parse warning and the file is skipped (the build continues).

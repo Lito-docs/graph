@@ -1,0 +1,64 @@
+---
+type: concept
+title: Lito Graph
+description: "The LitoGraph is the top-level data structure containing all nodes, edges, and statistics compiled from a documentation directory."
+canonical_name: "LitoGraph"
+entity_type: "data-structure"
+aliases: ["Graph", "Documentation Graph", "graph.json"]
+related_entities:
+  - "GraphNode"
+  - "GraphEdge"
+tags:
+  - core
+  - data-model
+version: "v1"
+---
+
+# Lito Graph
+
+The LitoGraph is the top-level data structure output by the compiler. It contains all nodes, edges, and computed statistics from a documentation directory.
+
+## Overview
+
+A LitoGraph is serialized as `graph.json` and can be loaded by the MCP server or inspected via the CLI.
+
+## Schema
+
+```json
+{
+  "version": "1.0.0",
+  "generated_at": "2026-02-27T15:55:05.738Z",
+  "source_dir": "/path/to/docs",
+  "stats": {
+    "total_nodes": 12,
+    "total_edges": 15,
+    "nodes_by_type": { "doc": 2, "concept": 2, "api": 3, "workflow": 1, "step": 4 },
+    "edges_by_type": { "ACTS_ON": 4, "RELATED_TO": 3, "USES_API": 1 },
+    "unresolved_refs": 1
+  },
+  "nodes": [],
+  "edges": []
+}
+```
+
+## Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `version` | `string` | Graph schema version |
+| `generated_at` | `string` | ISO 8601 timestamp of when the graph was built |
+| `source_dir` | `string` | Absolute path to the source documentation directory |
+| `stats` | `GraphStats` | Computed statistics |
+| `nodes` | `GraphNode[]` | All nodes in the graph |
+| `edges` | `Edge[]` | All edges connecting nodes |
+
+## Properties
+
+- **Deterministic** — building the same docs always produces the same graph (node IDs are hashed from `source_path:type`)
+- **Self-contained** — `graph.json` includes everything needed to serve the MCP tools
+- **Incrementally useful** — unresolved references produce warnings, not errors
+
+## Relationships
+
+- Contains all **GraphNodes** in the documentation
+- Contains all **GraphEdges** connecting those nodes

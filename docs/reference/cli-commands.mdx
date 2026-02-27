@@ -1,0 +1,86 @@
+---
+title: CLI Commands
+description: "Complete reference for all Lito Graph CLI commands: build, serve, and inspect."
+keywords:
+  - lito graph cli
+  - build command
+  - serve command
+  - inspect command
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - reference
+  - cli
+section: Reference
+---
+
+# CLI Commands
+
+## build
+
+Compile a documentation directory into `graph.json`.
+
+```bash
+lito-graph build -i ./docs -o ./graph.json
+```
+
+### Options
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `-i, --input <path>` | Yes | — | Path to the docs folder |
+| `-o, --output <path>` | No | `./graph.json` | Output file path |
+
+### Output
+
+Prints a summary with node counts by type, edge counts by type, and any unresolved reference warnings.
+
+## serve
+
+Start an MCP server exposing the graph via stdio transport.
+
+```bash
+# From pre-built graph
+lito-graph serve -g ./graph.json
+
+# Build and serve in one step
+lito-graph serve -i ./docs
+```
+
+### Options
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `-g, --graph <path>` | No | — | Path to pre-built graph.json |
+| `-i, --input <path>` | No | — | Path to docs folder (builds graph on startup) |
+
+One of `--graph` or `--input` is required.
+
+### Behavior
+
+- All logging goes to stderr (stdout is reserved for MCP JSON-RPC)
+- The server exposes 7 tools and 2 resources
+- Stays running until the parent process terminates
+
+## inspect
+
+Query and inspect a built graph from the command line.
+
+```bash
+lito-graph inspect -g ./graph.json --stats
+```
+
+### Options
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `-g, --graph <path>` | Yes | — | Path to graph.json |
+| `--stats` | No | Default | Show graph statistics |
+| `--nodes` | No | — | List all nodes |
+| `--type <type>` | No | — | Filter nodes by type |
+| `--node <id>` | No | — | Show details for a specific node |
+| `--edges` | No | — | List all edges |
+| `--orphans` | No | — | Show nodes with no edges |
+| `--unresolved` | No | — | Show unresolved references |
+
+Multiple flags can be combined. If no flag is provided, `--stats` is the default.

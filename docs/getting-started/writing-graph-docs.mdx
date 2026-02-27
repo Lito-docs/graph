@@ -1,0 +1,169 @@
+---
+title: Writing Graph Docs
+description: "Learn how to annotate your Markdown with frontmatter types so Lito Graph can build rich, traversable knowledge graphs."
+keywords:
+  - graph frontmatter
+  - concept docs
+  - api docs
+  - workflow docs
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - getting-started
+  - authoring
+section: Getting Started
+---
+
+# Writing Graph Docs
+
+Lito Graph recognizes four document types based on the `type` field in frontmatter. Standard docs work with no changes — you only add annotations when you want richer graph structure.
+
+## Standard Docs (default)
+
+Any Markdown file without a `type` field becomes a `DocNode`:
+
+```yaml
+---
+title: "Getting Started"
+description: "How to get started."
+tags: ["guide"]
+section: "Guides"
+---
+```
+
+No changes needed to existing docs.
+
+## Concept Docs
+
+Describe domain entities that agents should understand:
+
+```yaml
+---
+type: concept
+canonical_name: "Workspace"
+entity_type: "resource"
+aliases: ["Org Workspace", "Team Workspace"]
+related_entities:
+  - "User"
+  - "Project"
+tags: ["core"]
+version: "v1"
+---
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `type` | Yes | Must be `"concept"` |
+| `canonical_name` | Yes | The primary name for this entity |
+| `entity_type` | No | Category: `"resource"`, `"event"`, `"config"` |
+| `aliases` | No | Alternative names agents should recognize |
+| `related_entities` | No | Creates `RELATED_TO` edges to other concepts |
+
+### Recommended Sections
+
+- **Overview** — what this entity is
+- **Fields / Properties** — its data shape
+- **Relationships** — how it connects to other entities
+- **Common Operations** — what typically happens to it
+
+## API Docs
+
+Describe callable capabilities:
+
+```yaml
+---
+type: api
+operation_id: "create_workspace"
+api_type: "http"
+method: "POST"
+path: "/v1/workspaces"
+resource: "Workspace"
+capabilities:
+  - "create"
+  - "provision"
+side_effects:
+  - "creates_workspace_record"
+  - "sends_welcome_email"
+preconditions:
+  - "user_authenticated"
+  - "billing_plan_active"
+permissions:
+  - "workspace:write"
+rate_limit: "50 requests / minute"
+---
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `type` | Yes | Must be `"api"` |
+| `operation_id` | Yes | Unique identifier for this operation |
+| `method` | No | HTTP method (GET, POST, PUT, DELETE) |
+| `path` | No | Endpoint path |
+| `resource` | No | Creates `ACTS_ON` edge to matching concept |
+| `capabilities` | No | What this API can do |
+| `preconditions` | No | What must be true before calling |
+| `permissions` | No | Required permissions |
+| `side_effects` | No | What changes after calling |
+
+### Backward Compatibility
+
+Existing Lito API frontmatter is auto-converted:
+
+```yaml
+# Old format — still works
+api: "GET /users"
+```
+
+This becomes `method: "GET"`, `path: "/users"`, `operation_id: "get_users"`.
+
+## Workflow Docs
+
+Define multi-step procedures agents can follow:
+
+```yaml
+---
+type: workflow
+workflow_id: "onboard_new_workspace"
+goal: "Onboard a new customer workspace with default settings."
+primary_entity: "Workspace"
+risk_level: "medium"
+requires_human_approval: true
+tags: ["onboarding"]
+---
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `type` | Yes | Must be `"workflow"` |
+| `workflow_id` | Yes | Unique identifier |
+| `goal` | Yes | What this workflow achieves |
+| `primary_entity` | No | Creates `ACTS_ON` edge to matching concept |
+| `risk_level` | No | `"low"`, `"medium"`, `"high"` |
+| `requires_human_approval` | No | If true, agent must pause and ask |
+
+### Required Body Sections
+
+The compiler parses these `## Heading` sections:
+
+```markdown
+## Preconditions
+- User has valid billing plan.
+- Customer account exists.
+
+## Steps
+1. Create workspace via `create_workspace` API.
+2. Assign default roles.
+3. Send onboarding email.
+
+## Failure Modes
+- Workspace creation fails due to invalid billing.
+
+## Recovery
+- If billing invalid: trigger `notify_billing_issue`.
+
+## Guardrails
+- Never delete existing workspaces during onboarding.
+- Escalate to human if creation fails twice.
+```
+
+Backtick-wrapped names in Steps (e.g., `` `create_workspace` ``) create `USES_API` edges to matching ApiNodes.

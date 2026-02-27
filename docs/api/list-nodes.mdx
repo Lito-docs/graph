@@ -1,0 +1,56 @@
+---
+type: api
+title: list_nodes
+description: "List nodes in the documentation graph with optional filtering by type and tag."
+operation_id: "list_nodes"
+api_type: "mcp-tool"
+resource: "GraphNode"
+capabilities:
+  - "list"
+  - "filter"
+tags:
+  - mcp
+  - tools
+version: "v1"
+---
+
+# list_nodes
+
+List nodes in the documentation graph. Filter by type or tag to narrow results.
+
+## Parameters
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `type` | `string` | No | — | Filter by node type: `doc`, `concept`, `api`, `workflow`, `step` |
+| `tag` | `string` | No | — | Filter by tag |
+| `limit` | `number` | No | `50` | Maximum number of results to return |
+
+## Response
+
+Returns an array of node summaries:
+
+```json
+[
+  {
+    "id": "9c4c9063760e",
+    "type": "concept",
+    "title": "Workspace",
+    "summary": "A workspace is the top-level organizational unit.",
+    "slug": "/concepts/workspace"
+  }
+]
+```
+
+## Examples
+
+```
+// List all concept nodes
+list_nodes({ type: "concept" })
+
+// List all nodes tagged "onboarding"
+list_nodes({ tag: "onboarding" })
+
+// List first 10 API nodes
+list_nodes({ type: "api", limit: 10 })
+```

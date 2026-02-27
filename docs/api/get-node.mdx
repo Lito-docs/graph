@@ -1,0 +1,62 @@
+---
+type: api
+title: get_node
+description: "Get full details of a specific node by its ID or slug."
+operation_id: "get_node"
+api_type: "mcp-tool"
+resource: "GraphNode"
+capabilities:
+  - "read"
+tags:
+  - mcp
+  - tools
+version: "v1"
+---
+
+# get_node
+
+Get full details of a specific node by ID or slug. Returns the complete node object with all type-specific fields.
+
+## Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `identifier` | `string` | Yes | Node ID, slug, or ID prefix |
+
+## Response
+
+Returns the full node object. The shape depends on the node type:
+
+```json
+{
+  "id": "eb0e9f44ca78",
+  "type": "api",
+  "title": "Create Workspace",
+  "summary": "Create a new workspace for an organization.",
+  "source_path": "api/create-workspace.md",
+  "slug": "/api/create-workspace",
+  "anchors": ["create-workspace", "request", "response"],
+  "tags": ["workspace", "create"],
+  "api_type": "http",
+  "operation_id": "create_workspace",
+  "method": "POST",
+  "path": "/v1/workspaces",
+  "resource": "Workspace",
+  "capabilities": ["create", "provision"],
+  "preconditions": ["user_authenticated", "billing_plan_active"],
+  "permissions": ["workspace:write"]
+}
+```
+
+## Examples
+
+```
+// By full ID
+get_node({ identifier: "eb0e9f44ca78" })
+
+// By ID prefix
+get_node({ identifier: "eb0e" })
+
+// By slug
+get_node({ identifier: "/concepts/workspace" })
+```

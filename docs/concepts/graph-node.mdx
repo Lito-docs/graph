@@ -1,0 +1,56 @@
+---
+type: concept
+title: Graph Node
+description: "A node is the fundamental unit of the Lito Graph, representing a document, concept, API, workflow, or step."
+canonical_name: "GraphNode"
+entity_type: "data-structure"
+aliases: ["Node", "Graph Node"]
+related_entities:
+  - "GraphEdge"
+  - "LitoGraph"
+tags:
+  - core
+  - data-model
+version: "v1"
+---
+
+# Graph Node
+
+A node is the fundamental unit of the Lito Graph. Every Markdown file produces at least one node. Workflow files also produce StepNode children.
+
+## Overview
+
+All nodes share a common set of base fields and extend them with type-specific data.
+
+## Node Types
+
+| Type | Source | Description |
+|------|--------|-------------|
+| `doc` | Any `.md`/`.mdx` without a `type` field | Standard documentation page |
+| `concept` | `type: concept` | Domain entity (Workspace, User, Project) |
+| `api` | `type: api` or legacy `api: "GET /path"` | Callable capability (HTTP endpoint, function) |
+| `workflow` | `type: workflow` | Multi-step procedure with guardrails |
+| `step` | Auto-generated from workflow `## Steps` | Individual action within a workflow |
+
+## Base Fields
+
+Every node has these fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Deterministic SHA-256 hash of `source_path:type` |
+| `type` | `string` | One of: `doc`, `concept`, `api`, `workflow`, `step` |
+| `title` | `string` | From frontmatter `title` or derived from slug |
+| `summary` | `string` | From `description` or first paragraph of body |
+| `source_path` | `string` | Relative path to the source file |
+| `slug` | `string` | URL-friendly path (e.g., `/concepts/workspace`) |
+| `anchors` | `string[]` | Heading IDs extracted from the document |
+| `version` | `string?` | Version tag (e.g., `"v1"`) |
+| `locale` | `string?` | Language locale (e.g., `"es"`) |
+| `tags` | `string[]` | Freeform tags for filtering |
+
+## Relationships
+
+- Each GraphNode belongs to exactly one **LitoGraph**
+- GraphNodes connect to each other via **GraphEdges**
+- WorkflowNodes contain child **StepNodes** via `CONTAINS` edges

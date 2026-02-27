@@ -1,0 +1,61 @@
+---
+type: api
+title: search
+description: "Search the documentation graph by keyword across titles, summaries, tags, and canonical names."
+operation_id: "search"
+api_type: "mcp-tool"
+resource: "GraphNode"
+capabilities:
+  - "search"
+tags:
+  - mcp
+  - tools
+version: "v1"
+---
+
+# search
+
+Keyword search across the entire graph. Searches titles, summaries, tags, and canonical names with relevance scoring.
+
+## Parameters
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `query` | `string` | Yes | — | Search query |
+| `limit` | `number` | No | `20` | Maximum results |
+
+## Scoring
+
+| Match Location | Score |
+|---------------|-------|
+| Title | +10 |
+| Canonical name (concepts) | +10 |
+| Aliases (concepts) | +7 |
+| Summary | +5 |
+| Tags | +3 |
+
+Results are sorted by score descending.
+
+## Response
+
+```json
+[
+  {
+    "id": "9c4c9063760e",
+    "type": "concept",
+    "title": "Workspace",
+    "summary": "A workspace is the top-level organizational unit.",
+    "score": 10
+  }
+]
+```
+
+## Examples
+
+```
+// Search for workspace-related docs
+search({ query: "workspace" })
+
+// Search for onboarding workflows
+search({ query: "onboarding", limit: 5 })
+```

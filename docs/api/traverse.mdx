@@ -1,0 +1,56 @@
+---
+type: api
+title: traverse
+description: "Find nodes connected to a given node, with optional filtering by edge type and direction."
+operation_id: "traverse"
+api_type: "mcp-tool"
+resource: "GraphEdge"
+capabilities:
+  - "traverse"
+  - "filter"
+tags:
+  - mcp
+  - tools
+version: "v1"
+---
+
+# traverse
+
+Find nodes connected to a given node. Filter by edge type and direction to explore specific relationship paths.
+
+## Parameters
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `node_id` | `string` | Yes | — | Starting node ID |
+| `edge_type` | `string` | No | — | Filter by edge type (e.g., `RELATED_TO`, `ACTS_ON`, `USES_API`) |
+| `direction` | `string` | No | `"both"` | Edge direction: `"outgoing"`, `"incoming"`, or `"both"` |
+
+## Response
+
+Returns connected nodes with their edge types:
+
+```json
+[
+  {
+    "id": "eb0e9f44ca78",
+    "type": "api",
+    "title": "Create Workspace",
+    "summary": "Create a new workspace for an organization.",
+    "edge_types": ["ACTS_ON"]
+  }
+]
+```
+
+## Examples
+
+```
+// All connections to a concept
+traverse({ node_id: "9c4c9063760e" })
+
+// Only APIs that act on this entity
+traverse({ node_id: "9c4c9063760e", edge_type: "ACTS_ON", direction: "incoming" })
+
+// Steps contained in a workflow
+traverse({ node_id: "7e74e07bc2c3", edge_type: "CONTAINS", direction: "outgoing" })
+```

@@ -1,0 +1,51 @@
+---
+type: workflow
+title: Build Pipeline
+description: "The complete build pipeline that compiles a documentation directory into a LitoGraph."
+workflow_id: "build_graph"
+goal: "Compile a documentation directory into a typed knowledge graph (graph.json)."
+primary_entity: "LitoGraph"
+risk_level: "low"
+requires_human_approval: false
+tags:
+  - build
+  - pipeline
+version: "v1"
+---
+
+# Build Pipeline
+
+This workflow describes how the `lito-graph build` command compiles documentation into a graph.
+
+## Preconditions
+
+- Documentation directory exists and contains `.md` or `.mdx` files.
+- Bun runtime is installed.
+- Dependencies are installed (`bun install`).
+
+## Steps
+
+1. Discover all Markdown files via `collectMarkdownFiles` utility.
+2. Parse YAML frontmatter from each file using `gray-matter`.
+3. Classify each document by `type` field using Zod schema validation.
+4. Build typed nodes via `createNodes` factory.
+5. Extract heading trees and anchor IDs from document bodies.
+6. Resolve cross-references into typed edges via `resolveEdges`.
+7. Compute graph statistics (node/edge counts, unresolved refs).
+8. Serialize the LitoGraph to `graph.json`.
+
+## Failure Modes
+
+- Invalid frontmatter that fails Zod validation (e.g., missing `operation_id` on API doc).
+- File system permission errors when reading docs or writing graph.json.
+
+## Recovery
+
+- If a single file fails to parse: log warning and skip that file, continue building the rest of the graph.
+- If output directory is not writable: report error with the exact path.
+
+## Guardrails
+
+- Never modify source documentation files during build.
+- Always produce deterministic output — same input must yield same graph.
+- Unresolved references must be warnings, never errors.

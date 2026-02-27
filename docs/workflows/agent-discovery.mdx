@@ -1,0 +1,51 @@
+---
+type: workflow
+title: Agent Discovery
+description: "How an AI agent discovers capabilities, plans tasks, and checks safety constraints using the Lito Graph MCP tools."
+workflow_id: "agent_discovery"
+goal: "Enable an AI agent to discover what actions are possible, plan multi-step tasks, and verify safety constraints."
+primary_entity: "GraphNode"
+risk_level: "low"
+requires_human_approval: false
+tags:
+  - agents
+  - discovery
+  - mcp
+version: "v1"
+---
+
+# Agent Discovery
+
+This workflow describes the recommended pattern for AI agents to use the Lito Graph MCP tools.
+
+## Preconditions
+
+- Lito Graph MCP server is running and connected to the agent's IDE.
+- A graph has been built from the project's documentation.
+
+## Steps
+
+1. Call `get_graph_stats` to understand the scope of the documentation.
+2. Call `list_nodes` with type filters to discover available concepts, APIs, and workflows.
+3. Call `search` with the user's intent to find relevant nodes.
+4. Call `get_node` to read full details of matching nodes.
+5. Call `traverse` to explore connected nodes and understand relationships.
+6. Call `get_workflow` if a multi-step procedure is needed.
+7. Call `find_apis_for_entity` to discover all capabilities for a given entity.
+
+## Failure Modes
+
+- Search returns no results because docs lack graph frontmatter annotations.
+- Workflow steps reference APIs that don't have corresponding API docs.
+
+## Recovery
+
+- If search returns empty: fall back to listing all nodes and filtering manually.
+- If unresolved API references exist: warn the user that documentation is incomplete.
+
+## Guardrails
+
+- Always check `requires_human_approval` on workflows before executing steps.
+- Always check `risk_level` and present it to the user for medium or high risk workflows.
+- Never execute API calls without first reading their preconditions and permissions.
+- Present guardrails from workflow docs to the user before proceeding.

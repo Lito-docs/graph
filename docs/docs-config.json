@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "name": "Lito Graph",
+    "description": "Compile Markdown docs into a knowledge & workflow graph for AI agents.",
+    "url": "https://graph.litodocs.dev",
+    "version": "0.1.0"
+  },
+  "branding": {
+    "favicon": "/favicon.svg",
+    "colors": {
+      "primary": "#6D28D9",
+      "secondary": "#4F46E5",
+      "accent": "#10B981"
+    },
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter",
+      "code": "JetBrains Mono"
+    }
+  },
+  "navigation": {
+    "navbar": {
+      "links": [
+        { "label": "Docs", "href": "/introduction" },
+        { "label": "API", "href": "/api/list-nodes" },
+        { "label": "GitHub", "href": "https://github.com/Lito-docs/cli" }
+      ]
+    },
+    "anchors": [
+      {
+        "label": "Documentation",
+        "icon": "lucide:book-open",
+        "groups": ["Introduction", "Getting Started", "Concepts", "Workflows", "Reference"]
+      },
+      {
+        "label": "MCP Tools",
+        "icon": "lucide:wrench",
+        "groups": ["MCP Tools"]
+      }
+    ],
+    "sidebar": [
+      {
+        "group": "Introduction",
+        "items": [
+          { "label": "What is Lito Graph?", "slug": "introduction" },
+          { "label": "Architecture", "slug": "introduction/architecture" }
+        ]
+      },
+      {
+        "group": "Getting Started",
+        "items": [
+          { "label": "Quick Start", "slug": "getting-started/quick-start" },
+          { "label": "Writing Graph Docs", "slug": "getting-started/writing-graph-docs" },
+          { "label": "IDE Setup", "slug": "getting-started/ide-setup" }
+        ]
+      },
+      {
+        "group": "Concepts",
+        "items": [
+          { "label": "Graph Node", "slug": "concepts/graph-node" },
+          { "label": "Graph Edge", "slug": "concepts/graph-edge" },
+          { "label": "Lito Graph", "slug": "concepts/lito-graph" }
+        ]
+      },
+      {
+        "group": "Workflows",
+        "items": [
+          { "label": "Build Pipeline", "slug": "workflows/build-pipeline" },
+          { "label": "Agent Discovery", "slug": "workflows/agent-discovery" }
+        ]
+      },
+      {
+        "group": "Reference",
+        "items": [
+          { "label": "CLI Commands", "slug": "reference/cli-commands" },
+          { "label": "Frontmatter Schemas", "slug": "reference/frontmatter-schemas" },
+          { "label": "Configuration", "slug": "reference/configuration" }
+        ]
+      },
+      {
+        "group": "MCP Tools",
+        "items": [
+          { "label": "list_nodes", "slug": "api/list-nodes", "method": "TOOL" },
+          { "label": "get_node", "slug": "api/get-node", "method": "TOOL" },
+          { "label": "traverse", "slug": "api/traverse", "method": "TOOL" },
+          { "label": "search", "slug": "api/search", "method": "TOOL" },
+          { "label": "get_workflow", "slug": "api/get-workflow", "method": "TOOL" },
+          { "label": "find_apis_for_entity", "slug": "api/find-apis-for-entity", "method": "TOOL" },
+          { "label": "get_graph_stats", "slug": "api/get-graph-stats", "method": "TOOL" }
+        ]
+      }
+    ]
+  },
+  "seo": {
+    "defaultAuthor": "Lito Team",
+    "defaultKeywords": ["lito graph", "mcp", "documentation graph", "ai agents", "knowledge graph"]
+  },
+  "integrations": {
+    "editPage": {
+      "baseUrl": "https://github.com/Lito-docs/cli/edit/main/lito-graph/docs"
+    }
+  },
+  "footer": {
+    "tagline": "Agent-native documentation for the AI era.",
+    "copyright": "Lito Graph",
+    "links": [
+      {
+        "title": "Resources",
+        "items": [
+          { "label": "Lito CLI", "href": "https://github.com/Lito-docs/cli" },
+          { "label": "MCP Specification", "href": "https://modelcontextprotocol.io" }
+        ]
+      }
+    ]
+  }
+}

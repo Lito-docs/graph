@@ -1,0 +1,56 @@
+---
+type: api
+title: get_graph_stats
+description: "Get overview statistics about the documentation graph including node and edge counts by type."
+operation_id: "get_graph_stats"
+api_type: "mcp-tool"
+resource: "LitoGraph"
+capabilities:
+  - "read"
+tags:
+  - mcp
+  - tools
+version: "v1"
+---
+
+# get_graph_stats
+
+Get overview statistics about the documentation graph. Use this as the first tool call to understand the scope and shape of the documentation.
+
+## Parameters
+
+None.
+
+## Response
+
+```json
+{
+  "version": "1.0.0",
+  "generated_at": "2026-02-27T15:55:11.534Z",
+  "source_dir": "/path/to/docs",
+  "total_nodes": 12,
+  "total_edges": 15,
+  "nodes_by_type": {
+    "doc": 2,
+    "concept": 2,
+    "api": 3,
+    "workflow": 1,
+    "step": 4
+  },
+  "edges_by_type": {
+    "ACTS_ON": 4,
+    "RELATED_TO": 3,
+    "USES_API": 1,
+    "CONTAINS": 4,
+    "NEXT_STEP_OF": 3
+  },
+  "unresolved_refs": 1
+}
+```
+
+## Examples
+
+```
+// Get full stats
+get_graph_stats()
+```

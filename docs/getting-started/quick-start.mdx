@@ -1,0 +1,98 @@
+---
+title: Quick Start
+description: "Build your first documentation graph and query it with MCP tools in under 2 minutes."
+keywords:
+  - lito graph quick start
+  - build documentation graph
+  - mcp setup
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - getting-started
+  - tutorial
+section: Getting Started
+---
+
+# Quick Start
+
+Build a graph from your docs and start querying it in under 2 minutes.
+
+## 1. Install
+
+```bash
+cd lito-graph
+bun install
+```
+
+## 2. Build a Graph
+
+Point it at any folder of Markdown files:
+
+```bash
+bun run bin/cli.ts build -i ./path/to/docs -o ./graph.json
+```
+
+You'll see output like:
+
+```
+◇  Found 12 nodes, 15 edges
+◇  Graph written to graph.json
+
+  Node breakdown:
+    api: 3
+    concept: 2
+    doc: 2
+    workflow: 1
+    step: 4
+```
+
+## 3. Inspect the Graph
+
+```bash
+# Overview stats
+bun run bin/cli.ts inspect -g ./graph.json --stats
+
+# List all nodes
+bun run bin/cli.ts inspect -g ./graph.json --nodes
+
+# Filter by type
+bun run bin/cli.ts inspect -g ./graph.json --type api
+
+# Find broken references
+bun run bin/cli.ts inspect -g ./graph.json --unresolved
+```
+
+## 4. Start the MCP Server
+
+```bash
+bun run bin/cli.ts serve -g ./graph.json
+```
+
+Or build and serve in one step:
+
+```bash
+bun run bin/cli.ts serve -i ./path/to/docs
+```
+
+## 5. Connect to Claude Code
+
+Create `.mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "lito-graph": {
+      "type": "stdio",
+      "command": "bun",
+      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+    }
+  }
+}
+```
+
+Start a new Claude Code session. You'll have access to all 7 graph tools.
+
+## Next Steps
+
+- [Writing Graph Docs](/getting-started/writing-graph-docs) — add `type: concept`, `type: api`, and `type: workflow` to your frontmatter
+- [MCP Tools](/api/list-nodes) — explore the tools agents can use

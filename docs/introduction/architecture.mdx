@@ -1,0 +1,59 @@
+---
+title: Architecture
+description: "How Lito Graph compiles Markdown into a knowledge graph and serves it via MCP for AI agents to consume."
+keywords:
+  - lito graph architecture
+  - compilation pipeline
+  - mcp server
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - introduction
+  - architecture
+section: Introduction
+---
+
+# Architecture
+
+Lito Graph has three layers: authoring, compilation, and serving.
+
+## System Overview
+
+```
+┌─────────────────────┐
+│  Authoring Layer    │  Markdown + YAML frontmatter
+│  (.md / .mdx files)  │  type: concept | api | workflow
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────┐
+│  Compilation Layer  │  graph-builder.ts orchestrator
+│  (Lito Graph CLI)    │  Discovery → Parse → Nodes → Edges → Stats
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────┐
+│  Serving Layer      │  MCP server on stdio
+│  (graph.json + MCP)  │  7 tools + 2 resources
+└─────────────────────┘
+```
+
+## Compilation Pipeline
+
+The `build` command runs this pipeline:
+
+1. **Discovery** — `collectMarkdownFiles()` walks the docs directory, excludes `_assets`, `_css`, `_images`, `_landing`, `public`, `node_modules`
+2. **Parse** — `gray-matter` extracts YAML frontmatter; Zod validates against the matching schema based on `type` field
+3. **Classify** — files are classified as `doc`, `concept`, `api`, or `workflow` based on frontmatter
+4. **Build Nodes** — `node-factory` creates typed nodes with deterministic IDs (SHA-256 hash of `source_path:type`)
+5. **Extract Headings** — regex-based heading tree extraction generates anchor IDs
+6. **Resolve Edges** — cross-references in frontmatter fields (`related_entities`, `resource`, `uses_api`) become typed edges
+7. **Compute Stats** — node/edge counts by type, unresolved reference count
+
+## Key Design Decisions
+
+- **gray-matter** over hand-rolled parser — the existing Lito `parseFrontmatter()` only handles `key: value`; graph frontmatter needs YAML arrays and nested objects
+- **No remark/unified** — heading extraction and section parsing are regex-based, matching existing patterns. Add remark later if MDX component parsing is needed
+- **Deterministic node IDs** — hash of `source_path:type` so same docs always produce same `graph.json`
+- **Unresolved references = warnings, not errors** — graph stays useful during incremental authoring
+- **MCP stdio transport** — standard for IDE integrations (Claude Desktop, Cursor, VS Code)

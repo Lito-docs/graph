@@ -1,0 +1,52 @@
+---
+title: What is Lito Graph?
+description: "Lito Graph compiles Markdown documentation into a typed knowledge graph that AI agents can traverse, reason over, and act on via MCP."
+keywords:
+  - lito graph
+  - documentation graph
+  - ai agents
+  - mcp server
+  - knowledge graph
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - introduction
+  - overview
+section: Introduction
+---
+
+# What is Lito Graph?
+
+Lito Graph transforms your Markdown documentation into a **typed knowledge & workflow graph** that AI agents can reason over, plan with, and act on — not just search through.
+
+## The Problem
+
+Today, agents consume docs via RAG: chunk text, embed it, retrieve the top-k similar chunks. This has fundamental limitations:
+
+- **No relationships** — RAG finds the "Create User" page but doesn't know it *acts on* the User entity or is *step 2* of an onboarding workflow
+- **No planning** — an agent can't answer "what's the full sequence to onboard a customer?" because steps are scattered across pages
+- **No safety** — nothing tells the agent "this workflow requires human approval" or "never delete workspaces during onboarding"
+
+## The Solution
+
+Lito Graph adds a compilation layer between your docs and agents:
+
+```
+Markdown + Frontmatter  →  Lito Graph Compiler  →  graph.json  →  MCP Server  →  AI Agents
+```
+
+Your docs stay human-readable. Light annotations in frontmatter create machine-traversable structure.
+
+## Key Features
+
+- **5 node types** — DocNode, ConceptNode, ApiNode, WorkflowNode, StepNode
+- **14 edge types** — structural, semantic, capability, and procedural relationships
+- **7 MCP tools** — list, get, traverse, search, workflow, entity APIs, stats
+- **Backward compatible** — existing Lito `api: "GET /users"` format auto-converts
+- **Deterministic** — same docs always produce the same graph
+
+## Next Steps
+
+- [Quick Start](/getting-started/quick-start) — build your first graph in 2 minutes
+- [Writing Graph Docs](/getting-started/writing-graph-docs) — learn the frontmatter schemas
+- [Architecture](/introduction/architecture) — understand the compilation pipeline

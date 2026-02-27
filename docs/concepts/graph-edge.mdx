@@ -1,0 +1,76 @@
+---
+type: concept
+title: Graph Edge
+description: "An edge is a typed, directed connection between two nodes in the Lito Graph representing structural, semantic, capability, or procedural relationships."
+canonical_name: "GraphEdge"
+entity_type: "data-structure"
+aliases: ["Edge", "Graph Edge", "Relationship"]
+related_entities:
+  - "GraphNode"
+  - "LitoGraph"
+tags:
+  - core
+  - data-model
+version: "v1"
+---
+
+# Graph Edge
+
+An edge is a typed, directed connection between two graph nodes. Edges are the key differentiator between Lito Graph and flat document search — they encode relationships agents can traverse.
+
+## Overview
+
+Edges are resolved automatically from frontmatter fields during the build pipeline. When a reference can't be resolved, it creates an `unresolved:` edge with a warning instead of failing the build.
+
+## Edge Categories
+
+### Structural Edges
+
+Derived from file system hierarchy:
+
+| Type | Description | Source |
+|------|-------------|--------|
+| `PARENT_OF` | Directory index → child pages | Folder structure |
+| `CHILD_OF` | Child page → directory index | Folder structure |
+| `NEXT_SECTION` | Sequential navigation | Sidebar order |
+
+### Semantic Edges
+
+Derived from concept relationships:
+
+| Type | Description | Source |
+|------|-------------|--------|
+| `RELATED_TO` | Bidirectional concept link | `related_entities` field |
+| `DEPENDS_ON` | Hard dependency | Explicit annotation |
+| `CONTAINS` | Parent-child containment | Workflow → StepNodes |
+| `DEPRECATED_BY` | Superseded by newer version | Explicit annotation |
+
+### Capability Edges
+
+Derived from API metadata:
+
+| Type | Description | Source |
+|------|-------------|--------|
+| `ACTS_ON` | API operates on an entity | `resource` field |
+| `REQUIRES` | Prerequisite for operation | `preconditions` field |
+| `EMITS` | Produces events/effects | `side_effects` field |
+| `USES_API` | Step calls an API | Backtick refs in workflow steps |
+
+### Procedural Edges
+
+Derived from workflow structure:
+
+| Type | Description | Source |
+|------|-------------|--------|
+| `NEXT_STEP_OF` | Sequential step chain | Step ordering |
+| `ON_FAILURE_TRIGGER` | Error recovery workflow | Recovery section |
+| `ESCALATES_TO` | Human escalation path | Recovery section |
+
+## Edge Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `source` | `string` | Source node ID |
+| `target` | `string` | Target node ID (or `unresolved:Name` for broken refs) |
+| `type` | `EdgeType` | One of the 14 edge types above |
+| `label` | `string?` | Human-readable label for the relationship |

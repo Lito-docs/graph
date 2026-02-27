@@ -1,0 +1,76 @@
+---
+type: api
+title: get_workflow
+description: "Get a complete workflow with its ordered steps, linked API details, and guardrails."
+operation_id: "get_workflow"
+api_type: "mcp-tool"
+resource: "GraphNode"
+capabilities:
+  - "read"
+  - "aggregate"
+tags:
+  - mcp
+  - tools
+version: "v1"
+---
+
+# get_workflow
+
+Get a complete workflow with its steps, linked API details, and guardrails. This is the primary tool for agents planning multi-step tasks.
+
+## Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `workflow_id` | `string` | Yes | Workflow ID (from frontmatter) or node ID |
+
+## Response
+
+Returns the workflow node plus its ordered steps with linked API details:
+
+```json
+{
+  "workflow": {
+    "id": "7e74e07bc2c3",
+    "type": "workflow",
+    "workflow_id": "onboard_new_workspace",
+    "goal": "Onboard a new customer workspace with default settings.",
+    "risk_level": "medium",
+    "requires_human_approval": true,
+    "steps": [
+      { "step_number": 1, "action": "Create workspace via create_workspace API.", "uses_api": "create_workspace" },
+      { "step_number": 2, "action": "Assign default roles to initial users." },
+      { "step_number": 3, "action": "Provision default projects." },
+      { "step_number": 4, "action": "Send onboarding email sequence." }
+    ]
+  },
+  "steps": [
+    {
+      "id": "f39293f6c73d",
+      "type": "step",
+      "step_number": 1,
+      "action": "Create workspace via create_workspace API.",
+      "uses_api": "create_workspace",
+      "linked_apis": [
+        {
+          "operation_id": "create_workspace",
+          "method": "POST",
+          "path": "/v1/workspaces",
+          "preconditions": ["user_authenticated", "billing_plan_active"],
+          "permissions": ["workspace:write"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Examples
+
+```
+// By workflow_id
+get_workflow({ workflow_id: "onboard_new_workspace" })
+
+// By node ID
+get_workflow({ workflow_id: "7e74e07bc2c3" })
+```

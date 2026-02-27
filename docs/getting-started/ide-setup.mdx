@@ -1,0 +1,84 @@
+---
+title: IDE Setup
+description: "Connect Lito Graph's MCP server to Claude Code, Claude Desktop, or Cursor for agent-powered documentation queries."
+keywords:
+  - mcp setup
+  - claude code
+  - claude desktop
+  - cursor
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - getting-started
+  - setup
+section: Getting Started
+---
+
+# IDE Setup
+
+Lito Graph serves its data via MCP (Model Context Protocol) over stdio. This works with any MCP-compatible client.
+
+## Claude Code
+
+Create `.mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "lito-graph": {
+      "type": "stdio",
+      "command": "bun",
+      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+    }
+  }
+}
+```
+
+Start a new Claude Code session. Run `/mcp` to verify the server is connected.
+
+## Claude Desktop
+
+Add to your Claude Desktop configuration (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "lito-graph": {
+      "command": "bun",
+      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+    }
+  }
+}
+```
+
+## Cursor
+
+Add to your Cursor MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "lito-graph": {
+      "command": "bun",
+      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+    }
+  }
+}
+```
+
+## Build + Serve
+
+You can skip pre-building `graph.json` and point directly at your docs folder:
+
+```bash
+# Builds graph on startup, then serves via MCP
+bun run bin/cli.ts serve -i ./path/to/docs
+```
+
+## Verify Connection
+
+Once connected, ask your agent:
+
+> "Using lito-graph tools, show me the graph stats."
+
+You should see node and edge counts from your documentation.
