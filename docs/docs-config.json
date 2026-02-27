@@ -29,11 +29,13 @@
     "anchors": [
       {
         "label": "Documentation",
+        "href": "/introduction",
         "icon": "lucide:book-open",
         "groups": ["Introduction", "Getting Started", "Concepts", "Workflows", "Reference"]
       },
       {
         "label": "MCP Tools",
+        "href": "/api/list-nodes",
         "icon": "lucide:wrench",
         "groups": ["MCP Tools"]
       }
