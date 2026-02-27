@@ -5,6 +5,7 @@ export interface BaseNode {
   summary: string;
   source_path: string;
   slug: string;
+  url?: string;
   anchors: string[];
   version?: string;
   locale?: string;

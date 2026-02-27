@@ -19,13 +19,16 @@ export async function cli() {
     .description("Compile docs into graph.json")
     .requiredOption("-i, --input <path>", "Path to the docs folder")
     .option("-o, --output <path>", "Output file path", "./graph.json")
+    .option("-b, --base-url <url>", "Base URL of the hosted docs site (adds url field to each node)")
     .action(buildCommand);
 
   program
     .command("serve")
     .description("Start MCP server exposing the graph")
     .option("-i, --input <path>", "Path to the docs folder (builds graph on startup)")
-    .option("-g, --graph <path>", "Path to pre-built graph.json")
+    .option("-g, --graph <path>", "Path to local graph.json")
+    .option("-u, --url <url>", "URL to a remote graph.json (e.g. https://example.com/graph.json)")
+    .option("-b, --base-url <url>", "Base URL for docs (used with --input)")
     .action(serveCommand);
 
   program

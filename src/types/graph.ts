@@ -13,6 +13,7 @@ export interface LitoGraph {
   version: string;
   generated_at: string;
   source_dir: string;
+  base_url?: string;
   stats: GraphStats;
   nodes: GraphNode[];
   edges: Edge[];

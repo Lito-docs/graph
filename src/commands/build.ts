@@ -7,6 +7,7 @@ import { buildGraph } from "../core/graph-builder.js";
 interface BuildOptions {
   input: string;
   output: string;
+  baseUrl?: string;
 }
 
 export async function buildCommand(options: BuildOptions) {
@@ -23,7 +24,9 @@ export async function buildCommand(options: BuildOptions) {
 
     // Step 1: Build graph
     s.start("Scanning docs...");
-    const { graph, warnings } = await buildGraph(inputPath);
+    const { graph, warnings } = await buildGraph(inputPath, {
+      baseUrl: options.baseUrl,
+    });
     s.stop(
       `Found ${pc.bold(String(graph.stats.total_nodes))} nodes, ${pc.bold(String(graph.stats.total_edges))} edges`
     );
