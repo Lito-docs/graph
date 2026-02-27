@@ -54,7 +54,8 @@
         "items": [
           { "label": "Quick Start", "slug": "getting-started/quick-start" },
           { "label": "Writing Graph Docs", "slug": "getting-started/writing-graph-docs" },
-          { "label": "IDE Setup", "slug": "getting-started/ide-setup" }
+          { "label": "IDE Setup", "slug": "getting-started/ide-setup" },
+          { "label": "Live Benchmark", "slug": "getting-started/benchmark" }
         ]
       },
       {
