@@ -4,11 +4,11 @@
   "description": "Compile Markdown docs into a knowledge & workflow graph for AI agents. MCP server included.",
   "type": "module",
   "bin": {
-    "lito-graph": "./bin/cli.ts"
+    "lito-graph": "./bin/run.js"
   },
   "files": [
     "bin/",
-    "src/",
+    "dist/",
     "README.md",
     "LICENSE"
   ],
@@ -16,6 +16,8 @@
     "build": "bun run bin/cli.ts build",
     "serve": "bun run bin/cli.ts serve",
     "inspect": "bun run bin/cli.ts inspect",
+    "compile": "tsup",
+    "prepublishOnly": "tsup",
     "test": "bun test"
   },
   "keywords": [
@@ -31,6 +33,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
     "@modelcontextprotocol/sdk": "^1.12.1",
@@ -41,6 +46,8 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
     "typescript": "^5.7.0"
   }
 }

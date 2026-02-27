@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { resolve } from "path";
 import { collectMarkdownFiles, deriveSlug } from "./doc-utils.js";
 import { parseAndClassify } from "./frontmatter.js";
@@ -36,7 +37,7 @@ export async function buildGraph(
 
   for (const file of files) {
     try {
-      const content = await Bun.file(file.absolutePath).text();
+      const content = await readFile(file.absolutePath, "utf-8");
       const parsed = parseAndClassify(content);
       const slug = deriveSlug(file.relativePath);
       const { anchors } = extractHeadings(parsed.body);

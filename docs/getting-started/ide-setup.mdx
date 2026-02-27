@@ -16,7 +16,7 @@ section: Getting Started
 
 # IDE Setup
 
-Lito Graph serves its data via MCP (Model Context Protocol) over stdio. This works with any MCP-compatible client.
+Lito Graph serves its data via MCP (Model Context Protocol) over stdio. This works with any MCP-compatible client. No cloning required — `npx` handles everything.
 
 ## Claude Code
 
@@ -27,8 +27,8 @@ Create `.mcp.json` in your project root:
   "mcpServers": {
     "lito-graph": {
       "type": "stdio",
-      "command": "bun",
-      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+      "command": "npx",
+      "args": ["-y", "@litodocs/graph", "https://docs.example.com/graph.json"]
     }
   }
 }
@@ -44,8 +44,8 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
 {
   "mcpServers": {
     "lito-graph": {
-      "command": "bun",
-      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+      "command": "npx",
+      "args": ["-y", "@litodocs/graph", "https://docs.example.com/graph.json"]
     }
   }
 }
@@ -59,20 +59,23 @@ Add to your Cursor MCP settings:
 {
   "mcpServers": {
     "lito-graph": {
-      "command": "bun",
-      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+      "command": "npx",
+      "args": ["-y", "@litodocs/graph", "https://docs.example.com/graph.json"]
     }
   }
 }
 ```
 
-## Build + Serve
+## Local Development
 
-You can skip pre-building `graph.json` and point directly at your docs folder:
+For local development, you can also use the CLI directly with Bun:
 
 ```bash
-# Builds graph on startup, then serves via MCP
-bun run bin/cli.ts serve -i ./path/to/docs
+# Build + serve in one step
+lito-graph serve -i ./path/to/docs
+
+# Or serve a pre-built graph file
+lito-graph serve -g ./graph.json
 ```
 
 ## Verify Connection

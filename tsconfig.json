@@ -9,7 +9,7 @@
     "outDir": "./dist",
     "rootDir": ".",
     "declaration": true,
-    "types": ["bun-types"]
+    "types": ["node"]
   },
   "include": ["src/**/*", "bin/**/*"],
   "exclude": ["node_modules", "dist", "test"]

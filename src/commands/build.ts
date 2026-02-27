@@ -1,4 +1,5 @@
 import { existsSync } from "fs";
+import { writeFile } from "node:fs/promises";
 import { resolve } from "path";
 import { intro, outro, spinner, log } from "@clack/prompts";
 import pc from "picocolors";
@@ -45,7 +46,7 @@ export async function buildCommand(options: BuildOptions) {
     // Step 3: Write output
     const outputPath = resolve(options.output);
     s.start(`Writing ${pc.cyan(outputPath)}...`);
-    await Bun.write(outputPath, JSON.stringify(graph, null, 2));
+    await writeFile(outputPath, JSON.stringify(graph, null, 2), "utf-8");
     s.stop(`Graph written to ${pc.cyan(outputPath)}`);
 
     // Summary

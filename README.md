@@ -16,19 +16,29 @@ Lito Graph compiles your Markdown into a typed knowledge graph with nodes (conce
 
 ## Quick Start
 
+### Use a hosted graph (zero-install)
+
+If your docs site already serves `graph.json`, any MCP client can connect with one command:
+
+```bash
+npx -y @litodocs/graph https://docs.example.com/graph.json
+```
+
+### Build locally
+
 ```bash
 # Install
 cd lito-graph
 bun install
 
 # Build a graph from your docs
-bun run bin/cli.ts build -i ../docs -o ./graph.json
+lito-graph build -i ./docs -o ./graph.json
 
 # Inspect it
-bun run bin/cli.ts inspect -g ./graph.json --stats
+lito-graph inspect -g ./graph.json --stats
 
 # Start MCP server
-bun run bin/cli.ts serve -g ./graph.json
+lito-graph serve -g ./graph.json
 ```
 
 ## Document Types
@@ -113,8 +123,8 @@ Add to `.mcp.json` in your project root:
   "mcpServers": {
     "lito-graph": {
       "type": "stdio",
-      "command": "bun",
-      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+      "command": "npx",
+      "args": ["-y", "@litodocs/graph", "https://docs.example.com/graph.json"]
     }
   }
 }
@@ -128,8 +138,8 @@ Add to your MCP settings:
 {
   "mcpServers": {
     "lito-graph": {
-      "command": "bun",
-      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+      "command": "npx",
+      "args": ["-y", "@litodocs/graph", "https://docs.example.com/graph.json"]
     }
   }
 }
@@ -173,7 +183,7 @@ Lito Graph and [Context7](https://context7.com) solve **different problems**. Us
 | **Planning** | Single page at a time | Full workflows with ordered steps + linked APIs |
 | **Safety** | Hope the agent reads the warning | `requires_human_approval`, `risk_level`, `guardrails` as machine-readable fields |
 | **Completeness** | Top-k search (might miss things) | Graph traversal (guaranteed exhaustive) |
-| **Setup** | Zero — works instantly | Requires build step + optional frontmatter |
+| **Setup** | Zero — works instantly | One `npx` command + optional frontmatter |
 | **Privacy** | Cloud service | Fully local, self-hosted |
 
 ### When to use what

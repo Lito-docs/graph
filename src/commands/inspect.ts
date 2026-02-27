@@ -1,4 +1,5 @@
 import { existsSync } from "fs";
+import { readFile } from "node:fs/promises";
 import { resolve } from "path";
 import pc from "picocolors";
 import type { LitoGraph } from "../types/graph.js";
@@ -22,7 +23,7 @@ export async function inspectCommand(options: InspectOptions) {
       process.exit(1);
     }
 
-    const content = await Bun.file(graphPath).text();
+    const content = await readFile(graphPath, "utf-8");
     const graph: LitoGraph = JSON.parse(content);
 
     // Determine what to show — default to stats

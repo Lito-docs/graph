@@ -17,19 +17,31 @@ section: Getting Started
 
 Build a graph from your docs and start querying it in under 2 minutes.
 
-## 1. Install
+## Option A: Use a hosted graph (zero-install)
+
+If your docs site already serves `graph.json`, connect any MCP client with one command — no cloning, no dependencies:
+
+```bash
+npx -y @litodocs/graph https://docs.example.com/graph.json
+```
+
+Skip to [step 5](#5-connect-to-claude-code) to wire it into your IDE.
+
+## Option B: Build locally
+
+### 1. Install
 
 ```bash
 cd lito-graph
 bun install
 ```
 
-## 2. Build a Graph
+### 2. Build a Graph
 
 Point it at any folder of Markdown files:
 
 ```bash
-bun run bin/cli.ts build -i ./path/to/docs -o ./graph.json
+lito-graph build -i ./path/to/docs -o ./graph.json
 ```
 
 You'll see output like:
@@ -46,32 +58,32 @@ You'll see output like:
     step: 4
 ```
 
-## 3. Inspect the Graph
+### 3. Inspect the Graph
 
 ```bash
 # Overview stats
-bun run bin/cli.ts inspect -g ./graph.json --stats
+lito-graph inspect -g ./graph.json --stats
 
 # List all nodes
-bun run bin/cli.ts inspect -g ./graph.json --nodes
+lito-graph inspect -g ./graph.json --nodes
 
 # Filter by type
-bun run bin/cli.ts inspect -g ./graph.json --type api
+lito-graph inspect -g ./graph.json --type api
 
 # Find broken references
-bun run bin/cli.ts inspect -g ./graph.json --unresolved
+lito-graph inspect -g ./graph.json --unresolved
 ```
 
-## 4. Start the MCP Server
+### 4. Start the MCP Server
 
 ```bash
-bun run bin/cli.ts serve -g ./graph.json
+lito-graph serve -g ./graph.json
 ```
 
 Or build and serve in one step:
 
 ```bash
-bun run bin/cli.ts serve -i ./path/to/docs
+lito-graph serve -i ./path/to/docs
 ```
 
 ## 5. Connect to Claude Code
@@ -83,8 +95,8 @@ Create `.mcp.json` in your project root:
   "mcpServers": {
     "lito-graph": {
       "type": "stdio",
-      "command": "bun",
-      "args": ["run", "path/to/lito-graph/bin/cli.ts", "serve", "-g", "./graph.json"]
+      "command": "npx",
+      "args": ["-y", "@litodocs/graph", "https://docs.example.com/graph.json"]
     }
   }
 }

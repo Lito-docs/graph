@@ -1,4 +1,5 @@
 import { existsSync } from "fs";
+import { readFile } from "node:fs/promises";
 import { resolve } from "path";
 import pc from "picocolors";
 import { buildGraph } from "../core/graph-builder.js";
@@ -39,7 +40,7 @@ export async function serveCommand(options: ServeOptions) {
         console.error(pc.red(`Graph file not found: ${graphPath}`));
         process.exit(1);
       }
-      const content = await Bun.file(graphPath).text();
+      const content = await readFile(graphPath, "utf-8");
       graph = JSON.parse(content) as LitoGraph;
       console.error(
         pc.dim(
