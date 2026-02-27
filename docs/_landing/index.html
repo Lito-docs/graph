@@ -1,0 +1,399 @@
+<!-- ============ HERO (Split Layout) ============ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-wrap">
+    <div class="hero-split">
+      <div class="hero-text">
+        <div class="hero-badge" data-reveal>
+          <span class="badge-dot"></span>
+          Open Source &middot; MIT License
+        </div>
+        <h1 class="hero-h1" data-reveal>
+          Knowledge graphs for <em>AI agents</em>
+        </h1>
+        <p class="hero-sub" data-reveal>
+          Turn your Markdown docs into a typed knowledge graph with nodes, edges, and workflows. Query it via MCP so AI agents actually understand your documentation.
+        </p>
+        <div class="hero-actions" data-reveal>
+          <a href="/getting-started/quick-start" class="btn-primary">
+            Get Started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="https://github.com/Lito-docs/cli" class="btn-outline" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Star on GitHub
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" data-reveal>
+        <!-- Animated graph visualization -->
+        <svg class="hero-graph-svg" viewBox="0 0 420 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Edges with labels -->
+          <g class="graph-edge" opacity="0.6">
+            <line x1="100" y1="80" x2="310" y2="80" stroke="url(#edge-grad)" stroke-width="1.5"/>
+            <text x="205" y="70" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="JetBrains Mono, monospace">USES_API</text>
+          </g>
+          <g class="graph-edge" opacity="0.6">
+            <line x1="100" y1="80" x2="100" y2="260" stroke="url(#edge-grad)" stroke-width="1.5"/>
+            <text x="80" y="175" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="JetBrains Mono, monospace" transform="rotate(-90, 80, 175)">RELATED_TO</text>
+          </g>
+          <g class="graph-edge" opacity="0.6">
+            <line x1="310" y1="80" x2="310" y2="260" stroke="url(#edge-grad)" stroke-width="1.5"/>
+            <text x="340" y="175" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="JetBrains Mono, monospace" transform="rotate(90, 340, 175)">ACTS_ON</text>
+          </g>
+          <g class="graph-edge" opacity="0.6">
+            <line x1="100" y1="260" x2="310" y2="260" stroke="url(#edge-grad)" stroke-width="1.5"/>
+            <text x="205" y="252" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="JetBrains Mono, monospace">NEXT_STEP_OF</text>
+          </g>
+          <g class="graph-edge" opacity="0.4">
+            <line x1="100" y1="80" x2="310" y2="260" stroke="url(#edge-grad)" stroke-width="1" stroke-dasharray="4 4"/>
+          </g>
+          <g class="graph-edge" opacity="0.4">
+            <line x1="310" y1="80" x2="100" y2="260" stroke="url(#edge-grad)" stroke-width="1" stroke-dasharray="4 4"/>
+          </g>
+
+          <!-- Node: Doc (top-left) -->
+          <g class="graph-node-1">
+            <circle cx="100" cy="80" r="36" fill="#F5F3FF" stroke="#6D28D9" stroke-width="1.5"/>
+            <circle cx="100" cy="80" r="36" fill="url(#node-glow-1)" opacity="0.3"/>
+            <text x="100" y="76" text-anchor="middle" fill="#6D28D9" font-size="11" font-weight="700" font-family="Inter, sans-serif">Doc</text>
+            <text x="100" y="90" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="JetBrains Mono, monospace">type: doc</text>
+          </g>
+
+          <!-- Node: API (top-right) -->
+          <g class="graph-node-2">
+            <circle cx="310" cy="80" r="36" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+            <circle cx="310" cy="80" r="36" fill="url(#node-glow-2)" opacity="0.3"/>
+            <text x="310" y="76" text-anchor="middle" fill="#10B981" font-size="11" font-weight="700" font-family="Inter, sans-serif">API</text>
+            <text x="310" y="90" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="JetBrains Mono, monospace">type: api</text>
+          </g>
+
+          <!-- Node: Concept (bottom-left) -->
+          <g class="graph-node-3">
+            <circle cx="100" cy="260" r="36" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+            <circle cx="100" cy="260" r="36" fill="url(#node-glow-3)" opacity="0.3"/>
+            <text x="100" y="256" text-anchor="middle" fill="#B45309" font-size="11" font-weight="700" font-family="Inter, sans-serif">Concept</text>
+            <text x="100" y="270" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="JetBrains Mono, monospace">type: concept</text>
+          </g>
+
+          <!-- Node: Workflow (bottom-right) -->
+          <g class="graph-node-4">
+            <circle cx="310" cy="260" r="36" fill="#EEF2FF" stroke="#4F46E5" stroke-width="1.5"/>
+            <circle cx="310" cy="260" r="36" fill="url(#node-glow-4)" opacity="0.3"/>
+            <text x="310" y="256" text-anchor="middle" fill="#4F46E5" font-size="11" font-weight="700" font-family="Inter, sans-serif">Workflow</text>
+            <text x="310" y="270" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="JetBrains Mono, monospace">type: workflow</text>
+          </g>
+
+          <!-- Gradient definitions -->
+          <defs>
+            <linearGradient id="edge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#6D28D9" stop-opacity="0.4"/>
+              <stop offset="50%" stop-color="#4F46E5" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#6D28D9" stop-opacity="0.4"/>
+            </linearGradient>
+            <radialGradient id="node-glow-1"><stop offset="0%" stop-color="#6D28D9" stop-opacity="0.15"/><stop offset="100%" stop-color="#6D28D9" stop-opacity="0"/></radialGradient>
+            <radialGradient id="node-glow-2"><stop offset="0%" stop-color="#10B981" stop-opacity="0.15"/><stop offset="100%" stop-color="#10B981" stop-opacity="0"/></radialGradient>
+            <radialGradient id="node-glow-3"><stop offset="0%" stop-color="#F59E0B" stop-opacity="0.15"/><stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/></radialGradient>
+            <radialGradient id="node-glow-4"><stop offset="0%" stop-color="#4F46E5" stop-opacity="0.15"/><stop offset="100%" stop-color="#4F46E5" stop-opacity="0"/></radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="hiw-section">
+  <div class="hiw-inner">
+    <span class="section-tag" data-reveal>How It Works</span>
+    <h2 class="section-h2" data-reveal>Three steps to agent-native docs</h2>
+    <div class="hiw-steps" data-reveal>
+      <div class="hiw-step">
+        <div class="hiw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 13-2 2 2 2"/><path d="m14 17 2-2-2-2"/></svg>
+        </div>
+        <h3>Write Markdown</h3>
+        <p>Add typed frontmatter to your existing docs. Five node types, simple YAML.</p>
+      </div>
+      <div class="hiw-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+        </div>
+        <h3>Build Graph</h3>
+        <p>The CLI compiles your docs into a typed JSON graph with nodes and edges.</p>
+      </div>
+      <div class="hiw-arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Query via MCP</h3>
+        <p>AI agents search, traverse, and discover workflows through 7 MCP tools.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE SHOWCASE (Tabbed) ============ -->
+<section class="showcase">
+  <div class="showcase-inner">
+    <span class="section-tag" data-reveal>The Graph</span>
+    <h2 class="section-h2" data-reveal>Structured knowledge, not flat files</h2>
+    <div class="showcase-card" data-reveal>
+      <div class="sc-tabs">
+        <button class="sc-tab active" data-tab="nodes">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+          5 Node Types
+        </button>
+        <button class="sc-tab" data-tab="edges">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+          14 Edge Types
+        </button>
+        <button class="sc-tab" data-tab="tools">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          7 MCP Tools
+        </button>
+      </div>
+      <div class="sc-body">
+        <!-- Panel: Node Types -->
+        <div class="sc-panel active" data-panel="nodes">
+          <div class="node-types-grid">
+            <div class="node-type-card">
+              <span class="nt-badge nt-doc">doc</span>
+              <h4>Doc</h4>
+              <p>Guides, tutorials, reference pages</p>
+            </div>
+            <div class="node-type-card">
+              <span class="nt-badge nt-concept">concept</span>
+              <h4>Concept</h4>
+              <p>Domain terms, entities, definitions</p>
+            </div>
+            <div class="node-type-card">
+              <span class="nt-badge nt-api">api</span>
+              <h4>API</h4>
+              <p>Endpoints, functions, tool specs</p>
+            </div>
+            <div class="node-type-card">
+              <span class="nt-badge nt-workflow">workflow</span>
+              <h4>Workflow</h4>
+              <p>Multi-step procedures with guardrails</p>
+            </div>
+            <div class="node-type-card">
+              <span class="nt-badge nt-step">step</span>
+              <h4>Step</h4>
+              <p>Individual actions in a workflow</p>
+            </div>
+          </div>
+        </div>
+        <!-- Panel: Edge Types -->
+        <div class="sc-panel" data-panel="edges">
+          <div class="edge-groups">
+            <div class="edge-group">
+              <h4>Relationships</h4>
+              <ul>
+                <li>RELATED_TO</li>
+                <li>DEPENDS_ON</li>
+                <li>PART_OF</li>
+                <li>EXTENDS</li>
+              </ul>
+            </div>
+            <div class="edge-group">
+              <h4>Actions</h4>
+              <ul>
+                <li>ACTS_ON</li>
+                <li>USES_API</li>
+                <li>CONFIGURED_BY</li>
+                <li>TRIGGERED_BY</li>
+                <li>PRODUCES</li>
+              </ul>
+            </div>
+            <div class="edge-group">
+              <h4>Workflows</h4>
+              <ul>
+                <li>HAS_STEP</li>
+                <li>NEXT_STEP_OF</li>
+                <li>ALTERNATIVE_TO</li>
+                <li>REQUIRES</li>
+                <li>VALIDATES</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Panel: MCP Tools -->
+        <div class="sc-panel" data-panel="tools">
+          <div class="mcp-tools-grid">
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">list_nodes</div>
+                <div class="mcp-tool-desc">Filter nodes by type or tag</div>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">get_node</div>
+                <div class="mcp-tool-desc">Full details by ID or slug</div>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">traverse</div>
+                <div class="mcp-tool-desc">Find connected nodes by edge type</div>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">search</div>
+                <div class="mcp-tool-desc">Keyword search across all fields</div>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">get_workflow</div>
+                <div class="mcp-tool-desc">Steps, API links, and guardrails</div>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">find_apis_for_entity</div>
+                <div class="mcp-tool-desc">APIs that act on a concept</div>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div>
+                <div class="mcp-tool-name">get_graph_stats</div>
+                <div class="mcp-tool-desc">Overview counts and metadata</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TERMINAL DEMO ============ -->
+<section class="demo">
+  <div class="demo-inner">
+    <span class="section-tag" data-reveal>See It In Action</span>
+    <h2 class="section-h2" data-reveal>From zero to MCP in one command</h2>
+    <p class="section-sub" data-reveal>Run the CLI, point it at a graph JSON, and your docs are queryable by any MCP client.</p>
+    <div class="demo-panels" data-reveal>
+      <!-- Left: Terminal -->
+      <div class="demo-panel">
+        <div class="demo-chrome">
+          <div class="demo-dots"><span style="background:#ff5f56"></span><span style="background:#ffbd2e"></span><span style="background:#27c93f"></span></div>
+          <span class="demo-title">Terminal</span>
+          <span class="demo-spacer"></span>
+        </div>
+        <div class="demo-body">
+          <div class="term-line"><span class="t-p">~</span> <span class="t-t" id="typed"></span><span class="t-c" id="cursor">|</span></div>
+          <div class="term-line term-out" id="o1"><span class="t-ok">&#10003;</span> <span class="t-d">Fetching graph...</span></div>
+          <div class="term-line term-out" id="o2"><span class="t-ok">&#10003;</span> <span class="t-d">Loaded: 50 nodes, 38 edges</span></div>
+          <div class="term-line term-out" id="o3"><span class="t-ok">&#10003;</span> <span class="t-brand">MCP server running on stdio</span></div>
+        </div>
+      </div>
+      <!-- Right: Agent query -->
+      <div class="demo-panel">
+        <div class="demo-chrome">
+          <div class="demo-dots"><span style="background:#ff5f56"></span><span style="background:#ffbd2e"></span><span style="background:#27c93f"></span></div>
+          <span class="demo-title">AI Agent</span>
+          <span class="demo-spacer"></span>
+        </div>
+        <div class="demo-body">
+          <div class="agent-line" id="a1" style="margin-bottom:0.5rem"><span class="t-comment">// Agent calls search tool</span></div>
+          <div class="agent-line" id="a2"><span class="t-key">search</span>(&#123; <span class="t-str">"query"</span>: <span class="t-str">"authentication"</span> &#125;)</div>
+          <div class="agent-line" id="a3" style="margin-top:0.75rem;margin-bottom:0.25rem"><span class="t-comment">// Returns matching nodes</span></div>
+          <div class="agent-line" id="a4">[&#123;</div>
+          <div class="agent-line" id="a5">&nbsp; <span class="t-key">"type"</span>: <span class="t-str">"api"</span>,<br>&nbsp; <span class="t-key">"title"</span>: <span class="t-str">"POST /auth/login"</span>,<br>&nbsp; <span class="t-key">"tags"</span>: [<span class="t-str">"auth"</span>, <span class="t-str">"jwt"</span>]</div>
+          <div class="agent-line" id="a6">&#125;]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENTO FEATURES ============ -->
+<section class="bento">
+  <div class="bento-inner">
+    <span class="section-tag" data-reveal>Features</span>
+    <h2 class="section-h2" data-reveal>Built for the agent era</h2>
+    <div class="bento-grid">
+      <div class="b-card" data-reveal>
+        <div class="b-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+        <h3>Zero Install</h3>
+        <p>Run with npx. No global packages, no setup wizard, no config files to maintain.</p>
+      </div>
+      <div class="b-card" data-reveal>
+        <div class="b-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <h3>Any Docs Framework</h3>
+        <p>Works with any Markdown-based docs. Astro, Next.js, Docusaurus, VitePress, or plain files.</p>
+      </div>
+      <div class="b-card" data-reveal>
+        <div class="b-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg></div>
+        <h3>Graph Traversal</h3>
+        <p>Agents navigate typed edges to discover related concepts, APIs, and workflow steps.</p>
+      </div>
+      <div class="b-card" data-reveal>
+        <div class="b-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Workflow Safety</h3>
+        <p>Workflows include guardrails, required checks, and ordered steps agents must follow.</p>
+      </div>
+      <div class="b-card" data-reveal>
+        <div class="b-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4-4 4 4"/></svg></div>
+        <h3>Public Hosting</h3>
+        <p>Host your graph.json on any CDN or static host. Agents fetch it at runtime via URL.</p>
+      </div>
+      <div class="b-card" data-reveal>
+        <div class="b-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg></div>
+        <h3>Fully Local</h3>
+        <p>Everything runs on your machine. No cloud service, no API keys, no data leaves your network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="cta-stats" data-reveal>
+      <div class="cta-stat">
+        <span class="cta-stat-num">5</span>
+        <span class="cta-stat-label">Node Types</span>
+      </div>
+      <div class="cta-stat-divider"></div>
+      <div class="cta-stat">
+        <span class="cta-stat-num">14</span>
+        <span class="cta-stat-label">Edge Types</span>
+      </div>
+      <div class="cta-stat-divider"></div>
+      <div class="cta-stat">
+        <span class="cta-stat-num">7</span>
+        <span class="cta-stat-label">MCP Tools</span>
+      </div>
+      <div class="cta-stat-divider"></div>
+      <div class="cta-stat">
+        <span class="cta-stat-num">MIT</span>
+        <span class="cta-stat-label">Licensed</span>
+      </div>
+    </div>
+    <h2 class="cta-h2" data-reveal>Ready to graph your docs?</h2>
+    <p class="cta-sub" data-reveal>Give your AI agents structured knowledge instead of raw text. Get started in one command.</p>
+    <div class="cta-actions" data-reveal>
+      <a href="/getting-started/quick-start" class="btn-primary btn-lg">
+        Read the Docs
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="https://github.com/Lito-docs/cli" class="btn-outline" target="_blank" rel="noopener">Star on GitHub</a>
+    </div>
+    <div class="cta-install" data-reveal>
+      <code><span class="t-d">$</span> npx @litodocs/graph https://your-docs.com/graph.json</code>
+    </div>
+  </div>
+</section>

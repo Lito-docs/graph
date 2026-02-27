@@ -7,6 +7,13 @@
   },
   "branding": {
     "favicon": "/favicon.svg",
+    "logo": {
+      "light": "/logo-light.svg",
+      "dark": "/logo-dark.svg",
+      "href": "/",
+      "height": 32,
+      "replacesTitle": false
+    },
     "colors": {
       "primary": "#6D28D9",
       "secondary": "#4F46E5",
@@ -103,6 +110,12 @@
     "editPage": {
       "baseUrl": "https://github.com/Lito-docs/cli/edit/main/lito-graph/docs"
     }
+  },
+  "landing": {
+    "type": "custom",
+    "source": "_landing",
+    "injectNav": true,
+    "injectFooter": true
   },
   "footer": {
     "tagline": "Agent-native documentation for the AI era.",
