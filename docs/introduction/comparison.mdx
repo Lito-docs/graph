@@ -1,0 +1,118 @@
+---
+title: Lito Graph vs Context7
+description: "How Lito Graph compares to Context7 MCP and other docs-for-agents tools — when to use each, and why they're complementary."
+keywords:
+  - lito graph vs context7
+  - mcp comparison
+  - rag vs graph
+  - agent documentation
+author: Lito Team
+publishDate: "2026-02-27"
+tags:
+  - introduction
+  - comparison
+section: Introduction
+---
+
+# Lito Graph vs Context7
+
+Lito Graph and [Context7](https://context7.com) solve **different problems**. They're complementary — use both.
+
+## The Core Difference
+
+**Context7** is a **live docs lookup** for third-party libraries. Ask "how do I use React hooks?" and it fetches the latest React docs. It prevents hallucination by giving agents real API signatures.
+
+**Lito Graph** compiles **your own docs** into a typed knowledge graph that agents can traverse, plan with, and act on safely. It's not a search tool — it's a reasoning layer.
+
+```
+Your agent's toolbox:
+├── Context7 MCP      → "How do I use this library?"  (external knowledge)
+└── Lito Graph MCP    → "How does our system work?"   (internal knowledge)
+    ├── What entities exist?
+    ├── What APIs act on them?
+    ├── What workflows should I follow?
+    └── What guardrails must I respect?
+```
+
+## Feature Comparison
+
+|  | Context7 | Lito Graph |
+|---|---|---|
+| **Purpose** | Look up third-party library docs | Operate on your own product/domain |
+| **Data format** | Flat text chunks (RAG-style) | Typed nodes + 14 edge types (graph) |
+| **Relationships** | None — isolated text results | `ACTS_ON`, `USES_API`, `RELATED_TO`, etc. |
+| **Planning** | Returns one page at a time | Full workflows with ordered steps + linked API details |
+| **Safety** | Hopes the agent reads warnings | `requires_human_approval`, `risk_level`, `guardrails` as machine-readable fields |
+| **Completeness** | Top-k search results (might miss things) | Graph traversal (guaranteed exhaustive) |
+| **Setup** | Zero — works instantly | Requires build step + optional frontmatter annotations |
+| **Freshness** | Always live, no build step | Requires rebuild when docs change |
+| **Privacy** | Cloud service (queries go to their servers) | Fully local, self-hosted, private |
+| **Breadth** | Thousands of libraries out of the box | Only your own docs |
+
+## Where Each Wins
+
+### Context7 is better for:
+
+- **Third-party libraries** — "How does Express.js routing work?"
+- **Quick lookups** — zero setup, instant results
+- **Staying current** — always fetches the latest published docs
+- **Breadth** — covers thousands of popular libraries
+
+### Lito Graph is better for:
+
+- **Your own domain** — "What entities exist in our platform?"
+- **Relationships** — "What APIs act on the Workspace entity?"
+- **Multi-step planning** — "Walk me through the full onboarding workflow"
+- **Safety enforcement** — "Does this workflow need human approval?"
+- **Impact analysis** — "If I change Workspace, what breaks?"
+- **Completeness** — "Show me everything connected to this entity"
+- **Privacy** — internal docs never leave your machine
+
+## Concrete Example
+
+### With Context7
+
+```
+Agent: "How do I create a workspace?"
+Context7: Returns a docs page about workspace creation
+Agent: Reads it, tries to call the API
+→ Might miss the preconditions
+→ Might not know about the onboarding workflow
+→ Doesn't know it needs human approval
+```
+
+### With Lito Graph
+
+```
+Agent: "How do I create a workspace?"
+→ search("workspace") finds ConceptNode(Workspace)
+→ find_apis_for_entity("Workspace") returns 3 APIs with full metadata
+→ get_workflow("onboard_new_workspace") returns:
+  - 4 ordered steps with linked API details
+  - preconditions: user_authenticated, billing_plan_active
+  - guardrails: "Never delete existing workspaces"
+  - requires_human_approval: true
+→ Agent asks for approval before proceeding
+→ Executes steps in order, checking preconditions
+→ If step fails, follows recovery path
+```
+
+## The Bottom Line
+
+Context7 prevents hallucinating API signatures.
+Lito Graph prevents **unsafe actions on your own systems**.
+
+Different problems. Complementary solutions. Use both.
+
+## When to Use What
+
+| Scenario | Best tool |
+|----------|-----------|
+| "How do I use Express.js middleware?" | Context7 |
+| "What's the full onboarding flow for our platform?" | Lito Graph |
+| "What's the React useState API?" | Context7 |
+| "Which of our APIs require admin permissions?" | Lito Graph |
+| "How do I configure Tailwind?" | Context7 |
+| "What happens if workspace creation fails?" | Lito Graph |
+| "What's new in Next.js 15?" | Context7 |
+| "What entities does the delete API affect?" | Lito Graph |

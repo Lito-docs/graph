@@ -135,6 +135,61 @@ Add to your MCP settings:
 }
 ```
 
+## Public Graph Hosting
+
+Build with `--base-url` so every node gets a full public URL:
+
+```bash
+lito-graph build -i ./docs -o ./graph.json --base-url https://docs.example.com
+```
+
+Each node gets a `url` field agents can navigate to:
+
+```json
+{
+  "title": "Create Workspace",
+  "slug": "/api/create-workspace",
+  "url": "https://docs.example.com/api/create-workspace"
+}
+```
+
+Host `graph.json` alongside your docs (e.g., in `public/`), then any agent can connect remotely:
+
+```bash
+lito-graph serve --url https://docs.example.com/graph.json
+```
+
+Works with **any** docs framework — Lito, Mintlify, Docusaurus, Fern, VitePress, GitBook. If it has Markdown files, Lito Graph can compile them.
+
+## Lito Graph vs Context7 MCP
+
+Lito Graph and [Context7](https://context7.com) solve **different problems**. Use both.
+
+|  | Context7 | Lito Graph |
+|---|---|---|
+| **Purpose** | Look up third-party library docs | Operate on your own product/domain |
+| **Data** | Flat text chunks (RAG) | Typed nodes + 14 edge types (graph) |
+| **Relationships** | None — isolated text | `ACTS_ON`, `USES_API`, `RELATED_TO`, etc. |
+| **Planning** | Single page at a time | Full workflows with ordered steps + linked APIs |
+| **Safety** | Hope the agent reads the warning | `requires_human_approval`, `risk_level`, `guardrails` as machine-readable fields |
+| **Completeness** | Top-k search (might miss things) | Graph traversal (guaranteed exhaustive) |
+| **Setup** | Zero — works instantly | Requires build step + optional frontmatter |
+| **Privacy** | Cloud service | Fully local, self-hosted |
+
+### When to use what
+
+| Scenario | Best tool |
+|----------|-----------|
+| "How do I use Express middleware?" | Context7 |
+| "What's the full onboarding flow for our platform?" | **Lito Graph** |
+| "What's the React useState API?" | Context7 |
+| "Which of our APIs require admin permissions?" | **Lito Graph** |
+| "How do I configure Tailwind?" | Context7 |
+| "What happens if workspace creation fails?" | **Lito Graph** |
+
+**Context7** prevents hallucinating API signatures (external knowledge).
+**Lito Graph** prevents unsafe actions on your own systems (internal knowledge).
+
 ## Graph Data Model
 
 ### Node Types

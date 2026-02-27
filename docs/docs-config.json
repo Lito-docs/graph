@@ -45,7 +45,8 @@
         "label": "Introduction",
         "items": [
           { "label": "What is Lito Graph?", "slug": "introduction" },
-          { "label": "Architecture", "slug": "introduction/architecture" }
+          { "label": "Architecture", "slug": "introduction/architecture" },
+          { "label": "Lito Graph vs Context7", "slug": "introduction/comparison" }
         ]
       },
       {
