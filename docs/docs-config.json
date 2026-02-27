@@ -40,14 +40,14 @@
     ],
     "sidebar": [
       {
-        "group": "Introduction",
+        "label": "Introduction",
         "items": [
           { "label": "What is Lito Graph?", "slug": "introduction" },
           { "label": "Architecture", "slug": "introduction/architecture" }
         ]
       },
       {
-        "group": "Getting Started",
+        "label": "Getting Started",
         "items": [
           { "label": "Quick Start", "slug": "getting-started/quick-start" },
           { "label": "Writing Graph Docs", "slug": "getting-started/writing-graph-docs" },
@@ -55,7 +55,7 @@
         ]
       },
       {
-        "group": "Concepts",
+        "label": "Concepts",
         "items": [
           { "label": "Graph Node", "slug": "concepts/graph-node" },
           { "label": "Graph Edge", "slug": "concepts/graph-edge" },
@@ -63,14 +63,14 @@
         ]
       },
       {
-        "group": "Workflows",
+        "label": "Workflows",
         "items": [
           { "label": "Build Pipeline", "slug": "workflows/build-pipeline" },
           { "label": "Agent Discovery", "slug": "workflows/agent-discovery" }
         ]
       },
       {
-        "group": "Reference",
+        "label": "Reference",
         "items": [
           { "label": "CLI Commands", "slug": "reference/cli-commands" },
           { "label": "Frontmatter Schemas", "slug": "reference/frontmatter-schemas" },
@@ -78,7 +78,7 @@
         ]
       },
       {
-        "group": "MCP Tools",
+        "label": "MCP Tools",
         "items": [
           { "label": "list_nodes", "slug": "api/list-nodes", "method": "TOOL" },
           { "label": "get_node", "slug": "api/get-node", "method": "TOOL" },
